@@ -1,8 +1,12 @@
-import { motion } from 'framer-motion'
 import { ArrowDown, ArrowRight } from 'lucide-react'
 
+const photoRotations = [-8, 4, -2, 7, -5]
+
 export function BirthdayLanding({ content, onContinue }) {
-  const heroPhotos = content.photos.slice(0, 5)
+  const heroPhotos = content.photos.slice(0, 8)
+  const filmPhotos = heroPhotos.length
+    ? Array.from({ length: 20 }, (_, index) => heroPhotos[index % heroPhotos.length])
+    : []
   return (
     <section className="scene scene-landing" aria-labelledby="landing-title">
       <div className="landing-paper-grain" aria-hidden="true" />
@@ -20,12 +24,11 @@ export function BirthdayLanding({ content, onContinue }) {
             <span>Keep exploring</span><ArrowRight size={17} strokeWidth={1.5} />
           </button>
         </div>
-        <div className="film-arc" aria-label="A curved collection of placeholder memory photographs">
-          {heroPhotos.map((photo, index) => (
-            <motion.figure key={photo.tag} className={`film-photo film-photo-${index + 1}`} initial={{ opacity: 0, y: 36, rotate: index % 2 ? 4 : -4 }} whileInView={{ opacity: 1, y: 0, rotate: (index - 2) * 4 }} viewport={{ once: true }} transition={{ delay: index * 0.1, duration: 0.7 }}>
+        <div className="film-arc" aria-label="A looping trail of memory photographs">
+          {filmPhotos.map((photo, index) => (
+            <figure key={`${photo.tag}-${index}`} className="film-photo" style={{ '--film-delay': `${-index * 1.8}s`, '--film-position': `${index * 5}%`, '--film-rotation': `${photoRotations[index % photoRotations.length]}deg` }}>
               <img src={photo.src} alt={photo.alt} />
-              <figcaption>{photo.tag} / {photo.caption}</figcaption>
-            </motion.figure>
+            </figure>
           ))}
           <span className="film-arc-line" aria-hidden="true" />
         </div>

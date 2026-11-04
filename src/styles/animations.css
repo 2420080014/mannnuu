@@ -13,10 +13,16 @@
   50% { opacity: 1; transform: scale(1.05); }
 }
 
+@keyframes film-orbit {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+
 .celebration-glow { animation: soft-pulse 9s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+  .film-photo { animation: none !important; offset-distance: var(--film-position); opacity: 1; transform: rotate(var(--film-rotation)); }
 }
 
 @keyframes burn-glow {
