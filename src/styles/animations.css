@@ -1,0 +1,50 @@
+.particles { inset: 0; overflow: hidden; pointer-events: none; position: absolute; z-index: 1; }
+.particle { animation: float-particle 7s ease-in-out infinite; animation-delay: var(--particle-delay); background: currentColor; border-radius: 50%; height: var(--particle-size); left: var(--particle-x); opacity: 0.48; position: absolute; top: var(--particle-y); width: var(--particle-size); }
+.particles-light { color: rgba(245, 240, 232, 0.66); }
+.particles-warm { color: rgba(213, 167, 66, 0.72); }
+
+@keyframes float-particle {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(11px, -18px, 0); }
+}
+
+@keyframes soft-pulse {
+  0%, 100% { opacity: 0.65; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.celebration-glow { animation: soft-pulse 9s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+}
+
+@keyframes burn-glow {
+  0%, 100% { opacity: 0.55; transform: scale(0.94); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+@keyframes burn-old {
+  0% { filter: none; opacity: 1; transform: rotate(0) scale(1); }
+  48% { filter: brightness(1.7) saturate(1.8); opacity: 1; transform: rotate(-2deg) scale(1.04); }
+  74% { filter: blur(1px) brightness(2) sepia(1); opacity: 0.75; transform: translateY(-12px) rotate(4deg) scale(1.08); }
+  100% { filter: blur(10px) brightness(2); opacity: 0; transform: translateY(-65px) rotate(10deg) scale(0.85); }
+}
+
+@keyframes enter-new {
+  0% { filter: blur(10px) brightness(1.8); opacity: 0; transform: translateY(70px) scale(0.65) rotate(-5deg); }
+  62% { filter: blur(0) brightness(1.35); opacity: 1; transform: translateY(-8px) scale(1.06) rotate(2deg); }
+  100% { filter: none; opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+}
+
+@keyframes ember-rise {
+  0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.5); }
+  15% { opacity: 0.95; }
+  100% { opacity: 0; transform: translate3d(calc((var(--ember-index) - 8) * 8px), -46vh, 0) scale(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .age-card-old, .age-card-new, .burning-glow, .ember-field span { animation: none !important; }
+  .age-card-old { opacity: 0.35; }
+  .age-card-new { opacity: 1; }
+}
