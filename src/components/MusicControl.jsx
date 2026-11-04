@@ -13,8 +13,23 @@ export function MusicControl({ src, label = 'music', unavailableLabel = 'add a s
       setAvailable(false)
       setPlaying(false)
     }
+    const startPlayback = () => {
+      audio.play().then(() => {
+        setPlaying(true)
+        document.removeEventListener('pointerdown', startPlayback)
+        document.removeEventListener('keydown', startPlayback)
+      }).catch(() => {})
+    }
     audio.addEventListener('error', onError)
-    return () => audio.removeEventListener('error', onError)
+    audio.play().then(() => setPlaying(true)).catch(() => {
+      document.addEventListener('pointerdown', startPlayback)
+      document.addEventListener('keydown', startPlayback)
+    })
+    return () => {
+      audio.removeEventListener('error', onError)
+      document.removeEventListener('pointerdown', startPlayback)
+      document.removeEventListener('keydown', startPlayback)
+    }
   }, [])
 
   const toggle = async () => {

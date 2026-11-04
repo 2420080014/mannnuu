@@ -17,7 +17,7 @@ export const birthdayContent = {
   // EDIT THESE TWO VALUES for the age-change animation.
   oldAge: '17',
   newAge: '18',
-  audioPath: '/audio/amsham-pinneyum.m4a',
+  audioPath: '/audio/birthday-song.mp3',
   letterVideoPath: '/video/birthday-letter.mp4',
   letterVideoPoster: '',
   letterAudioPath: '/audio/letter-music.mp3',
