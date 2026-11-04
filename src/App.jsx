@@ -6,7 +6,6 @@ import { Countdown } from './components/Countdown'
 import { LetterScene } from './components/LetterScene'
 import { MusicControl } from './components/MusicControl'
 import { PhotoGallery } from './components/PhotoGallery'
-import { SceneNav } from './components/SceneNav'
 import { SceneTransition } from './components/SceneTransition'
 import { Scrapbook } from './components/Scrapbook'
 
@@ -21,7 +20,6 @@ const scenes = [
 
 function App() {
   const [sceneIndex, setSceneIndex] = useState(0)
-  const goToScene = useCallback((index) => setSceneIndex(Math.max(0, Math.min(scenes.length - 1, index))), [])
   const nextScene = useCallback(() => setSceneIndex((current) => Math.min(scenes.length - 1, current + 1)), [])
   const restart = useCallback(() => setSceneIndex(0), [])
 
@@ -39,7 +37,6 @@ function App() {
     <div className={`app-frame app-scene-${scene.key}`}>
       <SceneTransition sceneKey={scene.key}>{scene.render(sceneIndex === scenes.length - 1 ? restart : nextScene)}</SceneTransition>
       {sceneIndex < scenes.length - 1 && <MusicControl src={birthdayContent.audioPath} />}
-      {sceneIndex > 0 && <SceneNav current={sceneIndex} onSelect={goToScene} />}
     </div>
   )
 }
